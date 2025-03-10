@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constructor Web Studio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <script src="https://unpkg.com/lucide-icons@0.249.1/dist/umd/lucide-icons.js"></script>
+  </head>
+
+  <body>
+    <main class="main">
+      <div class="container">
+        <h1 class="title">Constructor Web Studio</h1>
+        <div class="tabs">
+          <div class="tabs-list">
+            <button class="tab-trigger active" data-tab="dashboard" id="#dashboard-tab">Panel Principal</button>
+            <button class="tab-trigger " data-tab="editor" id="#editor-tab">Editor</button>
+            <button class="tab-trigger " data-tab="vista" id="#vista-tab">Vista Completa</button>
+          </div>
+          <section id="dashboard-tab">
+            <!-- Dashboard Tab Content -->
+            <div class="tab-content active" id="dashboard-tab">
+              <div class="grid">
+                <div class="card import-card">
+                  <div class="card-header">
+                    <h2 class="card-title">Importar Proyecto</h2>
+                    <p class="card-description">Importa tu proyecto existente para comenzar a editarlo</p>
+                  </div>
+                  <div class="card-content">
+                    <div class="mb-6">
+                      <label class="label">Tecnología del Proyecto</label>
+                      <div class="select-container">
+                        <select id="project-language" class="select">
+                          <option value="html">HTML/CSS/JS</option>
+                          <option value="react">React</option>
+                          <option value="php">PHP</option>
+                          <option value="python">Python</option>
+                        </select>
+                      </div>
+                      <br>
+                    </div>
+
+                    <!-- Import Sections -->
+                    <div class="import-sections">
+                      <div class="import-section" id="structure-section">
+                        <div class="section-header">
+                          <h3 class="section-title">
+                            <i data-lucide="layout"></i>
+                            Estructura
+                          </h3>
+                          <div class="check-circle hidden" id="structure-check"></div>
+                        </div>
+                        <p class="section-description" id="structure-description">
+                          Estructura HTML y elementos DOM
+                        </p>
+                        <div class="dropzone">
+                          <i data-lucide="upload"></i>
+                          <p class="dropzone-text">Arrastra archivos de estructura aquí</p>
+                          <button class="button button-outline import-btn" data-section="structure">Importar
+                            Estructura</button>
+                        </div>
+                      </div>
+
+                      <div class="import-section" id="design-section">
+                        <div class="section-header">
+                          <h3 class="section-title">
+                            <i data-lucide="paintbrush"></i>
+                            Diseño
+                          </h3>
+                          <div class="check-circle hidden" id="design-check"></div>
+                        </div>
+                        <p class="section-description" id="design-description">
+                          Estilos CSS y apariencia visual
+                        </p>
+                        <div class="dropzone">
+                          <i data-lucide="upload"></i>
+                          <p class="dropzone-text">Arrastra archivos de diseño aquí</p>
+                          <button class="button button-outline import-btn" data-section="design">Importar Diseño</button>
+                        </div>
+                      </div>
+
+                      <div class="import-section" id="functionality-section">
+                        <div class="section-header">
+                          <h3 class="section-title">
+                            <i data-lucide="zap"></i>
+                            Funcionalidad
+                          </h3>
+                          <div class="check-circle hidden" id="functionality-check"></div>
+                        </div>
+                        <p class="section-description" id="functionality-description">
+                          Código JavaScript e interacciones
+                        </p>
+                        <div class="dropzone">
+                          <i data-lucide="upload"></i>
+                          <p class="dropzone-text">Arrastra archivos de funcionalidad aquí</p>
+                          <button class="button button-outline import-btn" data-section="functionality">Importar
+                            Funcionalidad</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="import-tabs">
+                      <div class="tabs-list-secondary">
+                        <button class="tab-trigger-secondary active" data-tab="file" id="file-tab-btn">
+                          <i data-lucide="upload"></i>
+                          Archivo
+                        </button>
+                        <button class="tab-trigger-secondary" data-tab="url" id="url-tab-btn">
+                          <i data-lucide="link"></i>
+                          URL
+                        </button>
+                        <button class="tab-trigger-secondary" data-tab="code" id="code-tab-btn">
+                          <i data-lucide="code"></i>
+                          Código
+                        </button>
+                        <button class="tab-trigger-secondary" data-tab="image" id="image-tab-btn">
+                          <i data-lucide="image"></i>
+                          Imagen
+                        </button>
+                      </div>
+
+                      <div class="tab-content-secondary active" id="file-tab">
+                        <div class="dropzone large">
+                          <i data-lucide="upload" class="large-icon"></i>
+                          <p class="dropzone-text-large">Arrastra y suelta tus archivos aquí o haz clic para explorar</p>
+                          <button class="button button-outline">Explorar Archivos</button>
+                        </div>
+                      </div>
+
+                      <div class="tab-content-secondary" id="url-tab">
+                        <div class="space-y-4">
+                          <input type="text" class="input" placeholder="Introduce la URL del sitio web">
+                          <button class="button" id="import-url-btn">Importar desde URL</button>
+                        </div>
+                      </div>
+
+                      <div class="tab-content-secondary" id="code-tab">
+                        <div class="space-y-4">
+                          <textarea class="textarea" placeholder="Pega tu código aquí"></textarea>
+                          <button class="button" id="import-code-btn">Importar Código</button>
+                        </div>
+                      </div>
+
+                      <div class="tab-content-secondary" id="image-tab">
+                        <div class="dropzone large">
+                          <i data-lucide="image" class="large-icon"></i>
+                          <p class="dropzone-text-large">Sube una captura de pantalla para generar código</p>
+                          <button class="button button-outline">Subir Imagen</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button class="button button-primary" id="import-project-btn">Importar Proyecto</button>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">
+                    <h2 class="card-title">Proyectos Recientes</h2>
+                  </div>
+                  <div class="card-content">
+                    <div class="recent-projects">
+
+                      <div class="project-card">
+                        <div class="project-image">
+                          <i data-lucide="code"></i>
+                        </div>
+                        <h3 class="project-name">Sitio Web Corporativo</h3>
+                        <div class="project-meta">
+                          <span class="project-tag">HTML/CSS/JS</span>
+                          <p class="project-date">Hace 2 días</p>
+                        </div>
+                      </div>
+
+                      <div class="project-card">
+                        <div class="project-image">
+                          <div class="project-icon-react">⚛️</div>
+                        </div>
+                        <h3 class="project-name">Aplicación de Tareas</h3>
+                        <div class="project-meta">
+                          <span class="project-tag">React</span>
+                          <p class="project-date">Hace 1 semana</p>
+                        </div>
+                      </div>
+
+                      <div class="project-card">
+                        <div class="project-image">
+                          <div class="project-icon-php">🐘</div>
+                        </div>
+                        <h3 class="project-name">Portal de Noticias</h3>
+                        <div class="project-meta">
+                          <span class="project-tag">PHP</span>
+                          <p class="project-date">Hace 2 semanas</p>
+                        </div>
+                      </div>
+
+                      <div class="project-card">
+                        <div class="project-image">
+                          <div class="project-icon-python">🐍</div>
+                        </div>
+                        <h3 class="project-name">Dashboard Analítico</h3>
+                        <div class="project-meta">
+                          <span class="project-tag">Python</span>
+                          <p class="project-date">Hace 1 mes</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+          </section>
+
+          <section id="editor-tab">
+            <!-- Editor Tab Content -->
+            <div class="tab-content" id="editor-tab">
+              <div class="editor-container">
+                <!-- Toolbar -->
+                <div class="editor-toolbar">
+                  <div class="toolbar-left">
+                    <div class="select-container">
+                      <select id="editor-file" class="select">
+                        <option value="index">index.html</option>
+                        <option value="style">style.css</option>
+                        <option value="script">script.js</option>
+                      </select>
+                    </div>
+    
+                    <div class="editor-tabs">
+                      <button class="editor-tab active" data-tab="structure">
+                        <i data-lucide="layout"></i>
+                        Estructura
+                      </button>
+                      <button class="editor-tab" data-tab="design">
+                        <i data-lucide="paintbrush"></i>
+                        Diseño
+                      </button>
+                      <button class="editor-tab" data-tab="functionality">
+                        <i data-lucide="zap"></i>
+                        Funcionalidad
+                      </button>
+                    </div>
+                  </div>
+    
+                  <div class="toolbar-right">
+                    <button class="button button-outline" id="toggle-preview-btn">
+                      <i data-lucide="eye-off"></i>
+                      Ocultar Vista Previa
+                    </button>
+                    <button class="button button-outline" id="toggle-view-mode-btn">
+                      <i data-lucide="code"></i>
+                      Vista de Código
+                    </button>
+                    <button class="button button-outline">
+                      <i data-lucide="play"></i>
+                      Vista Previa
+                    </button>
+                    <button class="button button-outline">
+                      <i data-lucide="save"></i>
+                      Guardar
+                    </button>
+                  </div>
+                </div>
+    
+                <!-- Editor Layout -->
+                <div class="editor-layout">
+                  <!-- Left Sidebar - Element Tree -->
+                  <div class="editor-sidebar" id="element-tree">
+                    <div class="sidebar-content">
+                      <h3 class="sidebar-title">Estructura del Proyecto</h3>
+                      <div class="search-container">
+                        <input type="text" class="input" placeholder="Buscar archivos...">
+                      </div>
+    
+                      <div class="mb-4">
+                        <button class="button button-outline width-full">
+                          <i data-lucide="plus"></i>
+                          Añadir Elemento
+                        </button>
+                      </div>
+    
+                      <div class="tree-view">
+                        <div class="tree-item">
+                          <div class="tree-item-content">
+                            <span class="spacer"></span>
+                            <i data-lucide="file"></i>
+                            <span class="tree-item-label">index.html</span>
+                          </div>
+                        </div>
+                        <div class="tree-item">
+                          <div class="tree-item-content">
+                            <i data-lucide="chevron-down" class="tree-toggle"></i>
+                            <i data-lucide="folder"></i>
+                            <span class="tree-item-label">assets</span>
+                          </div>
+                          <div class="tree-item-children">
+                            <div class="tree-item">
+                              <div class="tree-item-content">
+                                <span class="spacer"></span>
+                                <i data-lucide="file"></i>
+                                <span class="tree-item-label">style.css</span>
+                              </div>
+                            </div>
+                            <div class="tree-item">
+                              <div class="tree-item-content">
+                                <span class="spacer"></span>
+                                <i data-lucide="file"></i>
+                                <span class="tree-item-label">script.js</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tree-item">
+                          <div class="tree-item-content">
+                            <i data-lucide="chevron-right" class="tree-toggle"></i>
+                            <i data-lucide="folder"></i>
+                            <span class="tree-item-label">components</span>
+                          </div>
+                          <div class="tree-item-children hidden">
+                            <div class="tree-item">
+                              <div class="tree-item-content">
+                                <span class="spacer"></span>
+                                <i data-lucide="file"></i>
+                                <span class="tree-item-label">header.html</span>
+                              </div>
+                            </div>
+                            <div class="tree-item">
+                              <div class="tree-item-content">
+                                <span class="spacer"></span>
+                                <i data-lucide="file"></i>
+                                <span class="tree-item-label">footer.html</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <!-- Main Content Area -->
+                  <div class="editor-main">
+                    <div class="preview-panel" id="preview-panel">
+                      <div class="preview-toolbar">
+                        <div class="device-buttons">
+                          <button class="button button-icon" data-device="mobile">
+                            <i data-lucide="smartphone"></i>
+                          </button>
+                          <button class="button button-icon" data-device="tablet">
+                            <i data-lucide="tablet"></i>
+                          </button>
+                          <button class="button button-icon active" data-device="desktop">
+                            <i data-lucide="laptop"></i>
+                          </button>
+                        </div>
+    
+                        <div class="zoom-controls">
+                          <button class="button button-icon" id="zoom-out">
+                            <i data-lucide="minus"></i>
+                          </button>
+                          <div class="select-container">
+                            <select id="zoom-level" class="select">
+                              <option value="50">50%</option>
+                              <option value="75">75%</option>
+                              <option value="100" selected>100%</option>
+                              <option value="125">125%</option>
+                              <option value="150">150%</option>
+                            </select>
+                          </div>
+                          <button class="button button-icon" id="zoom-in">
+                            <i data-lucide="plus"></i>
+                          </button>
+                        </div>
+                      </div>
+    
+                      <div class="preview-content">
+                        <div class="preview-container desktop" id="preview-container"></div>
+                      </div>
+                    </div>
+    
+                    <div class="code-panel hidden" id="code-panel">
+                      <div class="code-toolbar">
+                        <div class="code-tabs">
+                          <button class="code-tab active" data-code-tab="html">HTML</button>
+                          <button class="code-tab" data-code-tab="css">CSS</button>
+                          <button class="code-tab" data-code-tab="js">JavaScript</button>
+                        </div>
+    
+                        <div class="code-actions">
+                          <button class="button button-outline">
+                            <i data-lucide="copy"></i>
+                            Copiar
+                          </button>
+                          <button class="button button-outline">
+                            <i data-lucide="download"></i>
+                            Exportar
+                          </button>
+                        </div>
+                      </div>
+    
+                      <div class="code-content">
+                        <pre id="code-display"><code></code></pre>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <!-- Right Sidebar - Properties -->
+                  <div class="editor-sidebar" id="property-panel">
+                    <div class="sidebar-content">
+                      <h3 class="sidebar-title">Propiedades</h3>
+    
+                      <div class="property-tabs">
+                        <div class="property-tabs-list">
+                          <button class="property-tab" data-property-tab="element">Elemento</button>
+                          <button class="property-tab active" data-property-tab="style">Estilo</button>
+                          <button class="property-tab" data-property-tab="events">Eventos</button>
+                        </div>
+    
+                        <div class="property-tab-content" id="element-tab">
+                          <div class="property-group">
+                            <label class="label">Tipo de Elemento</label>
+                            <div class="select-container">
+                              <select id="element-type" class="select">
+                                <option value="div">div</option>
+                                <option value="p">p</option>
+                                <option value="h1">h1</option>
+                                <option value="button">button</option>
+                                <option value="input">input</option>
+                              </select>
+                            </div>
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label" for="element-id">ID</label>
+                            <input type="text" id="element-id" class="input" placeholder="ID del elemento">
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label" for="element-class">Clase</label>
+                            <input type="text" id="element-class" class="input" placeholder="Clase del elemento">
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label" for="element-content">Contenido</label>
+                            <input type="text" id="element-content" class="input" placeholder="Contenido del elemento">
+                          </div>
+                        </div>
+    
+                        <div class="property-tab-content active" id="style-tab">
+                          <div class="property-grid">
+                            <div class="property-group">
+                              <label class="label" for="width">Ancho</label>
+                              <input type="text" id="width" class="input" placeholder="Ancho">
+                            </div>
+                            <div class="property-group">
+                              <label class="label" for="height">Alto</label>
+                              <input type="text" id="height" class="input" placeholder="Alto">
+                            </div>
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label">Margen</label>
+                            <div class="property-grid-4">
+                              <input type="text" class="input" placeholder="Arriba">
+                              <input type="text" class="input" placeholder="Derecha">
+                              <input type="text" class="input" placeholder="Abajo">
+                              <input type="text" class="input" placeholder="Izquierda">
+                            </div>
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label">Relleno</label>
+                            <div class="property-grid-4">
+                              <input type="text" class="input" placeholder="Arriba">
+                              <input type="text" class="input" placeholder="Derecha">
+                              <input type="text" class="input" placeholder="Abajo">
+                              <input type="text" class="input" placeholder="Izquierda">
+                            </div>
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label">Color de Fondo</label>
+                            <div class="color-picker">
+                              <div class="color-preview" id="bg-color-preview"></div>
+                              <input type="text" id="bg-color-input" class="input color-input" value="#0070f3">
+                            </div>
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label">Color de Texto</label>
+                            <div class="color-picker">
+                              <div class="color-preview" id="text-color-preview"></div>
+                              <input type="text" id="text-color-input" class="input color-input" value="#000000">
+                            </div>
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label">Radio de Borde</label>
+                            <input type="range" class="range" min="0" max="50" step="1" value="0">
+                          </div>
+                        </div>
+    
+                        <div class="property-tab-content" id="events-tab">
+                          <div class="property-group">
+                            <label class="label" for="onclick">onClick</label>
+                            <input type="text" id="onclick" class="input" placeholder="Manejador onClick">
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label" for="onhover">onHover</label>
+                            <input type="text" id="onhover" class="input" placeholder="Manejador onHover">
+                          </div>
+    
+                          <div class="property-group">
+                            <label class="label" for="onchange">onChange</label>
+                            <input type="text" id="onchange" class="input" placeholder="Manejador onChange">
+                          </div>
+    
+                          <button class="button button-outline width-full">
+                            Añadir Evento Personalizado
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+    <br>
+          <section id="vista-tab">
+            <!-- Full View Tab Content -->
+            <div class="tab-content" id="vista-tab">
+              <div class="fullview-container">
+                <div class="fullview-toolbar">
+                  <div class="device-buttons">
+                    <button class="button button-icon" data-device="mobile">
+                      <i data-lucide="smartphone"></i>
+                    </button>
+                    <button class="button button-icon" data-device="tablet">
+                      <i data-lucide="tablet"></i>
+                    </button>
+                    <button class="button button-icon active" data-device="desktop">
+                      <i data-lucide="laptop"></i>
+                    </button>
+                  </div>
+    
+                  <div class="view-actions">
+                    <button class="button button-outline" id="fullview-toggle-btn">
+                      <i data-lucide="code"></i>
+                      Ver Código
+                    </button>
+    
+                    <div class="zoom-controls">
+                      <button class="button button-icon" id="fullview-zoom-out">
+                        <i data-lucide="minus"></i>
+                      </button>
+                      <div class="select-container">
+                        <select id="fullview-zoom-level" class="select">
+                          <option value="50">50%</option>
+                          <option value="75">75%</option>
+                          <option value="100" selected>100%</option>
+                          <option value="125">125%</option>
+                          <option value="150">150%</option>
+                        </select>
+                      </div>
+                      <button class="button button-icon" id="fullview-zoom-in">
+                        <i data-lucide="plus"></i>
+                      </button>
+                    </div>
+    
+                    <button class="button button-outline">
+                      <i data-lucide="save"></i>
+                      Guardar
+                    </button>
+    
+                    <button class="button button-outline">
+                      <i data-lucide="download"></i>
+                      Exportar
+                    </button>
+                  </div>
+                </div>
+    
+                <div class="fullview-content">
+                  <div class="fullview-preview" id="fullview-preview">
+                    <div class="preview-container desktop" id="fullview-preview-container"></div>
+                  </div>
+    
+                  <div class="fullview-code hidden" id="fullview-code">
+                    <div class="code-actions-top">
+                      <button class="button button-outline button-dark">
+                        <i data-lucide="copy"></i>
+                        Copiar Código
+                      </button>
+                    </div>
+                    <pre id="fullview-code-display"><code></code></pre>
+                  </div>
+                </div>
+    
+                <div class="fullview-footer">
+                  <div class="tip-card">
+                    <p class="tip-text">
+                      <strong>Consejo:</strong> Haz clic en cualquier elemento para seleccionarlo. Arrastra los elementos
+                      seleccionados para moverlos. Usa el panel de propiedades para editar estilos y atributos.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>   
+    </main>
+
+
+    <div class="color-picker-popover" id="color-picker-popover">
+      <div class="color-gradient"></div>
+      <div class="color-presets">
+        <div class="color-preset" data-color="#000000"></div>
+        <div class="color-preset" data-color="#ffffff"></div>
+        <div class="color-preset" data-color="#f44336"></div>
+        <div class="color-preset" data-color="#e91e63"></div>
+        <div class="color-preset" data-color="#9c27b0"></div>
+        <div class="color-preset" data-color="#673ab7"></div>
+        <div class="color-preset" data-color="#3f51b5"></div>
+        <div class="color-preset" data-color="#2196f3"></div>
+        <div class="color-preset" data-color="#03a9f4"></div>
+        <div class="color-preset" data-color="#00bcd4"></div>
+        <div class="color-preset" data-color="#009688"></div>
+        <div class="color-preset" data-color="#4caf50"></div>
+        <div class="color-preset" data-color="#8bc34a"></div>
+        <div class="color-preset" data-color="#cddc39"></div>
+        <div class="color-preset" data-color="#ffeb3b"></div>
+        <div class="color-preset" data-color="#ffc107"></div>
+      </div>
+      <div class="color-input-container">
+        <input type="text" id="popover-color-input" class="input">
+      </div>
+    </div>
+
+    <div id="toast-container" class="toast-container hidden">
+      <div id="toast" class="toast">
+        <div class="toast-content">
+          <h3 id="toast-title" class="toast-title">Título del Toast</h3>
+          <p id="toast-description" class="toast-description">Descripción del toast con más información.</p>
+        </div>
+        <button class="toast-close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Botón de cambio de tema (agregado) -->
+    <button class="theme-toggle" aria-label="Cambiar tema" id="theme-toggle">
+      <i data-lucide="sun"></i>
+    </button>
+
+    <!-- Scripts principales -->
+    <script src="js/main.js"></script>
+    <script src="js/component.js"></script>
+
+    <!-- Nuevos scripts para funcionalidad mejorada -->
+    <script src="js/selector.js"></script>
+    <script src="js/import.js"></script>
+    <script src="js/proyectpreview.js"></script>
+    <script>
+      // Inicializar iconos de Lucide
+      document.addEventListener('DOMContentLoaded', function () {
+        // Inicializar iconos
+        lucide.createIcons();
+
+        // Configurar pestañas principales
+        const tabTriggers = document.querySelectorAll('.tab-trigger');
+        tabTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            const tabName = trigger.getAttribute('data-tab');
+
+            // Desactivar todas las pestañas y contenido
+            document.querySelectorAll('.tab-trigger').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            // Activar pestaña seleccionada y su contenido
+            trigger.classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+
+            // Si es la pestaña de editor o vista completa, asegurarse de que se muestre contenido
+            if (tabName === 'editor' || tabName === 'fullview') {
+              initializeTabContent(tabName);
+            }
+          });
+        });
+
+        // Función para inicializar el contenido de las pestañas
+        function initializeTabContent(tabName) {
+          if (tabName === 'editor') {
+            // Asegurarse de que el panel de vista previa tenga contenido
+            const previewContainer = document.getElementById('preview-container');
+            if (previewContainer && !previewContainer.innerHTML.trim()) {
+              // Cargar contenido de muestra si está vacío
+              const importedProject = JSON.parse(localStorage.getItem('importedProject') || '{}');
+              if (importedProject.html) {
+                previewContainer.innerHTML = importedProject.html;
+              } else {
+                // Cargar contenido de muestra predeterminado
+                previewContainer.innerHTML = generateSampleHTML();
+              }
+              if (window.addSelectionListeners) {
+                window.addSelectionListeners(previewContainer);
+              }
+            }
+          } else if (tabName === 'fullview') {
+            // Asegurarse de que el panel de vista completa tenga contenido
+            const fullviewContainer = document.getElementById('fullview-preview-container');
+            if (fullviewContainer && !fullviewContainer.innerHTML.trim()) {
+              // Cargar contenido de muestra si está vacío
+              const importedProject = JSON.parse(localStorage.getItem('importedProject') || '{}');
+              if (importedProject.html) {
+                fullviewContainer.innerHTML = importedProject.html;
+              } else {
+                // Cargar contenido de muestra predeterminado
+                fullviewContainer.innerHTML = generateSampleHTML();
+              }
+              if (window.addSelectionListeners) {
+                window.addSelectionListeners(fullviewContainer);
+              }
+            }
+          }
+        }
+
+        // Generar HTML de muestra para las vistas previas
+        function generateSampleHTML() {
+          return `
+            <div style="max-width: 1200px; margin: 0 auto; padding: 20px; font-family: system-ui, sans-serif;">
+              <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; background-color: #f8f9fa; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
+                <h1 style="margin: 0; color: #333; font-size: 28px; background: linear-gradient(to right, #0070f3, #00a2ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Mi Proyecto</h1>
+                <nav>
+                  <ul style="display: flex; list-style: none; gap: 20px; margin: 0; padding: 0;">
+                    <li><a href="#" style="text-decoration: none; color: #0070f3; font-weight: 500; transition: all 0.2s;">Inicio</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #0070f3; font-weight: 500; transition: all 0.2s;">Acerca de</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #0070f3; font-weight: 500; transition: all 0.2s;">Servicios</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #0070f3; font-weight: 500; transition: all 0.2s;">Contacto</a></li>
+                  </ul>
+                </nav>
+              </header>
+              
+              <main>
+                <section style="margin-bottom: 40px; background-color: #f0f7ff; padding: 30px; border-radius: 12px; border: 1px solid #e1e7ef;">
+                  <h2 style="color: #333; font-size: 24px; margin-bottom: 15px;">Bienvenido a Constructor Web Studio</h2>
+                  <p style="line-height: 1.7; color: #555; margin-bottom: 20px;">
+                    Este es un proyecto de ejemplo que puedes editar completamente. Selecciona cualquier elemento
+                    para modificarlo, arrastra componentes para reorganizarlos, y personaliza todo el diseño según tus necesidades.
+                  </p>
+                  <div style="display: flex; gap: 10px;">
+                    <button style="background-color: #0070f3; color: white; border: none; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s; box-shadow: 0 4px 14px rgba(0, 118, 255, 0.39);">
+                      Comenzar Ahora
+                    </button>
+                    <button style="background-color: transparent; color: #0070f3; border: 1px solid #0070f3; padding: 12px 24px; border-radius: 6px; cursor: pointer; font-weight: 500; transition: all 0.2s;">
+                      Saber Más
+                    </button>
+                  </div>
+                </section>
+                
+                <section style="margin-bottom: 40px;">
+                  <h2 style="color: #333; font-size: 24px; margin-bottom: 20px; text-align: center;">Nuestros Servicios</h2>
+                  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 40px;">
+                    <div style="background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s;">
+                      <div style="width: 50px; height: 50px; background-color: #e1f5fe; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                        <span style="font-size: 24px;">🚀</span>
+                      </div>
+                      <h3 style="color: #333; margin-bottom: 10px;">Desarrollo Web</h3>
+                      <p style="color: #666; line-height: 1.6;">Creamos sitios web modernos y responsivos utilizando las últimas tecnologías.</p>
+                    </div>
+                    <div style="background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s;">
+                      <div style="width: 50px; height: 50px; background-color: #e8f5e9; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                        <span style="font-size: 24px;">📱</span>
+                      </div>
+                      <h3 style="color: #333; margin-bottom: 10px;">Aplicaciones Móviles</h3>
+                      <p style="color: #666; line-height: 1.6;">Desarrollamos aplicaciones nativas y multiplataforma para iOS y Android.</p>
+                    </div>
+                    <div style="background-color: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s;">
+                      <div style="width: 50px; height: 50px; background-color: #fff8e1; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 15px;">
+                        <span style="font-size: 24px;">⚙️</span>
+                      </div>
+                      <h3 style="color: #333; margin-bottom: 10px;">Consultoría Técnica</h3>
+                      <p style="color: #666; line-height: 1.6;">Ofrecemos asesoramiento experto para optimizar tus proyectos tecnológicos.</p>
+                    </div>
+                  </div>
+                </section>
+              </main>
+              
+              <footer style="text-align: center; padding: 30px 0; border-top: 1px solid #eaeaea; color: #666; background-color: #f8f9fa; border-radius: 8px; margin-top: 40px;">
+                <p>&copy; 2025 Constructor Web Studio. Todos los derechos reservados.</p>
+                <div style="display: flex; justify-content: center; gap: 20px; margin-top: 15px;">
+                  <a href="#" style="color: #0070f3; text-decoration: none;">Términos</a>
+                  <a href="#" style="color: #0070f3; text-decoration: none;">Privacidad</a>
+                  <a href="#" style="color: #0070f3; text-decoration: none;">Contacto</a>
+                </div>
+              </footer>
+            </div>
+          `;
+        }
+
+        // Configurar botón de cambio de tema
+        const themeToggle = document.getElementById('theme-toggle');
+        if (themeToggle) {
+          themeToggle.addEventListener('click', function () {
+            document.body.classList.toggle('dark');
+
+            // Guardar preferencia en localStorage
+            const isDarkMode = document.body.classList.contains('dark');
+            localStorage.setItem('darkMode', isDarkMode);
+
+            // Actualizar icono
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+              icon.setAttribute('data-lucide', isDarkMode ? 'moon' : 'sun');
+              lucide.createIcons();
+            }
+
+            // Mostrar toast
+            if (window.showToast) {
+              window.showToast(
+                'Tema cambiado',
+                `Se ha activado el modo ${isDarkMode ? 'oscuro' : 'claro'}`
+              );
+            }
+          });
+
+          // Inicializar con la preferencia guardada
+          const savedTheme = localStorage.getItem('darkMode');
+          const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+          const isDarkMode = savedTheme === 'true' || (savedTheme === null && prefersDarkScheme.matches);
+
+          if (isDarkMode) {
+            document.body.classList.add('dark');
+            const icon = themeToggle.querySelector('i');
+            if (icon) {
+              icon.setAttribute('data-lucide', 'moon');
+              lucide.createIcons();
+            }
+          }
+        }
+
+        // Asegurar que los botones de URL, código e imagen funcionen correctamente
+        document.getElementById('url-tab-btn').addEventListener('click', function () {
+          document.getElementById('url-tab').classList.add('active');
+          document.getElementById('file-tab').classList.remove('active');
+          document.getElementById('code-tab').classList.remove('active');
+          document.getElementById('image-tab').classList.remove('active');
+        });
+
+        document.getElementById('code-tab-btn').addEventListener('click', function () {
+          document.getElementById('code-tab').classList.add('active');
+          document.getElementById('file-tab').classList.remove('active');
+          document.getElementById('url-tab').classList.remove('active');
+          document.getElementById('image-tab').classList.remove('active');
+        });
+
+        document.getElementById('image-tab-btn').addEventListener('click', function () {
+          document.getElementById('image-tab').classList.add('active');
+          document.getElementById('file-tab').classList.remove('active');
+          document.getElementById('url-tab').classList.remove('active');
+          document.getElementById('code-tab').classList.remove('active');
+        });
+
+        // Inicializar las pestañas de editor y vista completa
+        initializeTabContent('editor');
+        initializeTabContent('fullview');
+      });
+    </script>
+  </body>
+</html>
